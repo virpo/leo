@@ -1,26 +1,29 @@
 # 🪶 Deployment
 
 - Source: `github.com/virpo/leo`, private by default.
-- Hosting: Vercel project `echt1/leo`.
-- Public fallback: https://leo-gamma-one.vercel.app/
-- Intended domain: https://leo.virpo.sk/
+- Hosting: Netlify project `leo-virpo`, team `virpo` (Pumpkings).
+- Project ID: `fd834e3a-3d17-4016-9957-8d171ce7a691`.
+- Public fallback: https://leo-virpo.netlify.app/
+- Intended domain: https://leo.virpo.io/
 
-The app is static and has no API keys, server, database or runtime speech dependency. Build with `npm ci && npm run build`. Publish with `vercel deploy --prod --scope echt1`.
+The app is static and has no API keys, server, database or runtime speech dependency. Build with `npm ci && npm run build`. Publish with `netlify deploy --prod --dir dist --no-build`.
 
-The source is pushed to `main`. Automatic deploy-on-push is not connected: `vercel git connect` reports “You need to add a Login Connection to your GitHub account first. (400)”. Connecting GitHub in the Vercel account is an optional owner step. CLI production deployments already work.
+The source is pushed to `main`. Automatic deploy-on-push is not connected. CLI production deployment to the authenticated Netlify account works.
+
+Vercel project `echt1/leo` was the initial host. Its account is not connected to the `virpo` GitHub identity. After the first commit, Vercel blocked deployment with “The deployment was blocked because the commit author doesn’t have permission to create deployments for this project.” GitHub integration separately reports “You need to add a Login Connection to your GitHub account first. (400)”. No author identity or access policy was changed. The site was published through the existing authenticated Netlify account instead.
 
 ## DNS handoff
 
-`virpo.sk` uses Exohosting nameservers. Vercel has accepted ownership and attached `leo.virpo.sk` to this project. DNS still resolves to Exohosting’s wildcard address, `92.240.253.18`.
+Peter corrected the hostname from `.sk` to `.io`. The mistaken `.sk` assignment was removed without changing Exohosting DNS. `virpo.io` uses Namecheap BasicDNS nameservers. Netlify has accepted `leo.virpo.io` as the custom domain. It does not yet have a public DNS record.
 
-Add this record at Exohosting:
+Add this record at Namecheap, in `virpo.io` → Advanced DNS:
 
 | Type | Name | Value |
 | --- | --- | --- |
-| CNAME | leo | 0113d66e83a25067.vercel-dns-017.com. |
+| CNAME | leo | leo-virpo.netlify.app |
 
-If an explicit `leo` A or AAAA record exists, replace only that conflicting record. Keep root-domain records, email and nameservers unchanged. A specific `leo` CNAME takes precedence over the existing wildcard.
+Keep root-domain records, other subdomains, email and nameservers unchanged. Use Automatic TTL. The earlier Vercel CNAME recommendation is obsolete for this site.
 
-Then run `vercel domains verify leo.virpo.sk --project leo --scope echt1`. Vercel provisions HTTPS after DNS is valid. Verify the final hostname with normal TLS validation and repeat the browser checks against it. Do not bypass certificate warnings.
+After DNS resolves, confirm Netlify provisions HTTPS. Verify the final hostname with normal TLS validation and repeat the browser checks against it. Do not bypass certificate warnings.
 
-Official reference: [Vercel custom-domain setup](https://vercel.com/docs/domains/set-up-custom-domain).
+Official references: [Namecheap CNAME setup](https://www.namecheap.com/support/knowledgebase/article.aspx/9646/2237/how-to-create-a-cname-record-for-your-domain/), [Netlify CLI](https://docs.netlify.com/api-and-cli-guides/cli-guides/get-started-with-cli/).

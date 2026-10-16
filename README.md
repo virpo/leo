@@ -4,7 +4,7 @@ A small interactive museum for curious children. Three inventions, four discover
 
 ![The gear lesson](docs/screenshots/gears.webp)
 
-Production: [Leo’s workshop](https://leo.virpo.sk/). Temporary hosting address: [leo-gamma-one.vercel.app](https://leo-gamma-one.vercel.app/).
+Production: [Leo’s workshop](https://leo.virpo.io/). Hosting address: [leo-virpo.netlify.app](https://leo-virpo.netlify.app/).
 
 ## Run
 
@@ -21,7 +21,7 @@ The tablet matrix includes 1180×820, 1180×740, 1024×672, 820×1060 and 768×9
 
 ## Deploy
 
-Vercel project `echt1/leo` builds `dist/` using `vercel.json`. `vercel deploy --prod --scope echt1` publishes the current source. The GitHub remote is `virpo/leo`. See [deployment notes](docs/DEPLOYMENT.md) for custom-domain configuration. No environment variables or secrets are needed by the app.
+Netlify project `leo-virpo`, in the existing `virpo` team, publishes `dist/` using `netlify.toml`. Run `npm run build`, then `netlify deploy --prod --dir dist --no-build`. The GitHub remote is `virpo/leo`. See [deployment notes](docs/DEPLOYMENT.md) for custom-domain configuration. No environment variables or secrets are needed by the app.
 
 ## Behaviour
 

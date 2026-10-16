@@ -5,6 +5,7 @@ test-results/
 playwright-report/
 artifacts/
 .vercel/
+.netlify/
 .env
 .env.*
 !.env.example
