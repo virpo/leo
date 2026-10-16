@@ -10,6 +10,8 @@ The app is static and has no API keys, server, database or runtime speech depend
 
 The source is pushed to `main`. Automatic deploy-on-push is not connected. CLI production deployment to the authenticated Netlify account works.
 
+The per-project Powered by Netlify badge is disabled (`built_with_badge_enabled: false`). Keep third-party promotional overlays out of the child-facing museum view.
+
 Vercel project `echt1/leo` was the initial host. Its account is not connected to the `virpo` GitHub identity. After the first commit, Vercel blocked deployment with “The deployment was blocked because the commit author doesn’t have permission to create deployments for this project.” GitHub integration separately reports “You need to add a Login Connection to your GitHub account first. (400)”. No author identity or access policy was changed. The site was published through the existing authenticated Netlify account instead.
 
 ## DNS handoff
