@@ -1,0 +1,17 @@
+{
+  "id": "/",
+  "name": "Leo’s workshop · Leova dielňa",
+  "short_name": "Leo",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#eee1c2",
+  "theme_color": "#eee1c2",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

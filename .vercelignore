@@ -1,0 +1,8 @@
+artifacts/
+docs/
+tests/
+scripts/
+node_modules/
+dist/
+.git/
+.env*

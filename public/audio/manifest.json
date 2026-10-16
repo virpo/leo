@@ -1,0 +1,262 @@
+[
+  {
+    "lang": "sk",
+    "id": "hello",
+    "text": "Ahoj! Ja som Leo. Rád vymýšľam nové veci. Vyber si stroj a poď sa so mnou hrať!"
+  },
+  {
+    "lang": "sk",
+    "id": "complete",
+    "text": "Výborne! Už vieš, čo tento stroj rozhýbe. Ktorý vynález preskúmame teraz?"
+  },
+  {
+    "lang": "sk",
+    "id": "screw-1",
+    "text": "Chyť rúčku a otáčaj ňou. Vidíš? Spolu s rúčkou sa točí aj drevená tyč."
+  },
+  {
+    "lang": "sk",
+    "id": "screw-1-result",
+    "text": "Presne tak! Rúčka roztočila celú tyč."
+  },
+  {
+    "lang": "sk",
+    "id": "screw-2",
+    "text": "Toto je špirála. Okolo tyče som natiahol plachtu. Roztoč ju a pozri, ako sa krúti!"
+  },
+  {
+    "lang": "sk",
+    "id": "screw-2-result",
+    "text": "Tyč a plachta sa točia spolu. Aká veľká špirála!"
+  },
+  {
+    "lang": "sk",
+    "id": "screw-3",
+    "text": "Vzduch nevidíme, ale môžeme ho rozhýbať. Roztoč špirálu. Čím rýchlejšie sa točí, tým silnejší je náš vietor!"
+  },
+  {
+    "lang": "sk",
+    "id": "screw-3-result",
+    "text": "Fíha, aký vietor! Tie čiary nám ukazujú, ako sa môže hýbať vzduch."
+  },
+  {
+    "lang": "sk",
+    "id": "screw-4",
+    "text": "Toto je celý môj stroj. Chcel som na ňom vyletieť do vzduchu. Roztoč ho. Podarí sa mu vzlietnuť?"
+  },
+  {
+    "lang": "sk",
+    "id": "screw-4-result",
+    "text": "Točí sa, ale neletí! Je príliš ťažký a ľudia mu nedokážu dať dosť sily. Aj odvážny nápad nás môže niečo naučiť."
+  },
+  {
+    "lang": "sk",
+    "id": "cart-1",
+    "text": "Pozri na toto koleso. Točí sa okolo tyče. Hovoríme jej os. Chyť koleso a roztoč ho!"
+  },
+  {
+    "lang": "sk",
+    "id": "cart-1-result",
+    "text": "Koleso sa točí a os ho drží na mieste."
+  },
+  {
+    "lang": "sk",
+    "id": "cart-2",
+    "text": "Tieto kolieska majú zúbky. Zapadajú do seba. Otoč malým kolieskom. Kam sa otočí veľké?"
+  },
+  {
+    "lang": "sk",
+    "id": "cart-2-result",
+    "text": "Veľké koliesko sa točí opačne. A pomalšie! Jedno koliesko poháňa druhé."
+  },
+  {
+    "lang": "sk",
+    "id": "cart-3",
+    "text": "Otáčaj kľukou. Pružina sa stáča a ukladá si energiu z tvojej ruky. Takto si pripravíme auto na jazdu."
+  },
+  {
+    "lang": "sk",
+    "id": "cart-3-result",
+    "text": "Pružina je natočená! Keď ju pustíme, rozvinie sa a roztočí kolesá."
+  },
+  {
+    "lang": "sk",
+    "id": "cart-4",
+    "text": "Auto je pripravené. Pusť ho! Pružina sa uvoľní, roztočí kolieska a auto sa pohne."
+  },
+  {
+    "lang": "sk",
+    "id": "cart-4-result",
+    "text": "Ide to! Pružina poháňa kolieska a tie poháňajú kolesá. Auto jazdí bez koňa!"
+  },
+  {
+    "lang": "sk",
+    "id": "knight-1",
+    "text": "Skús ohnúť svoj lakeť. Táto drevená ruka má tiež kĺb. Ťukni naň a pozri, ako sa ruka ohne."
+  },
+  {
+    "lang": "sk",
+    "id": "knight-1-result",
+    "text": "Kĺb spája dve časti ruky a dovolí im ohýbať sa."
+  },
+  {
+    "lang": "sk",
+    "id": "knight-2",
+    "text": "K ruke pripevníme šnúrku. Potiahni za ňu. Čo sa stane s rukou?"
+  },
+  {
+    "lang": "sk",
+    "id": "knight-2-result",
+    "text": "Ruka sa zdvihla! Šnúrka preniesla tvoje potiahnutie až k ruke."
+  },
+  {
+    "lang": "sk",
+    "id": "knight-3",
+    "text": "Šnúrku prehodíme cez malé koliesko. Volá sa kladka. Potiahni dolu a sleduj ruku!"
+  },
+  {
+    "lang": "sk",
+    "id": "knight-3-result",
+    "text": "Ťaháš dolu, ale ruka ide hore! Kladka zmenila smer potiahnutia."
+  },
+  {
+    "lang": "sk",
+    "id": "knight-4",
+    "text": "A tu je celý rytier! Tento model sme vymysleli podľa mojich kresieb. Otoč kľukou. Rytier ti zamáva."
+  },
+  {
+    "lang": "sk",
+    "id": "knight-4-result",
+    "text": "Ahoj! Kľuka ťahá za šnúrky, kĺby sa ohýbajú a rytier máva. Ako dávny robot!"
+  },
+  {
+    "lang": "en",
+    "id": "hello",
+    "text": "Hello! I am Leo. I love dreaming up new things. Pick a machine and come and play!"
+  },
+  {
+    "lang": "en",
+    "id": "complete",
+    "text": "Well done! You have discovered what makes this machine move. Which invention shall we explore next?"
+  },
+  {
+    "lang": "en",
+    "id": "screw-1",
+    "text": "Take the handle and turn it. Look! The wooden pole turns with your hand."
+  },
+  {
+    "lang": "en",
+    "id": "screw-1-result",
+    "text": "That is it! The handle makes the whole pole turn."
+  },
+  {
+    "lang": "en",
+    "id": "screw-2",
+    "text": "This twisty shape is a spiral. I wrapped a sail around the pole. Give it a spin!"
+  },
+  {
+    "lang": "en",
+    "id": "screw-2-result",
+    "text": "The pole and the sail turn together. What a wonderful twist!"
+  },
+  {
+    "lang": "en",
+    "id": "screw-3",
+    "text": "We cannot see air, but we can make it move. Spin the spiral. Faster turns make a stronger wind in our model!"
+  },
+  {
+    "lang": "en",
+    "id": "screw-3-result",
+    "text": "Whoosh! The little trails help us imagine the air moving."
+  },
+  {
+    "lang": "en",
+    "id": "screw-4",
+    "text": "Here is my whole flying machine. I hoped it would carry me into the sky. Spin it. Will it fly?"
+  },
+  {
+    "lang": "en",
+    "id": "screw-4-result",
+    "text": "It spins, but stays on the ground! It is too heavy for people to power. Even a bold idea can teach us something."
+  },
+  {
+    "lang": "en",
+    "id": "cart-1",
+    "text": "This wheel turns around a wooden rod. The rod is called an axle. Take the wheel and give it a turn!"
+  },
+  {
+    "lang": "en",
+    "id": "cart-1-result",
+    "text": "The wheel turns, and the axle holds it in place."
+  },
+  {
+    "lang": "en",
+    "id": "cart-2",
+    "text": "These wheels have little teeth that fit together. Turn the small gear. Which way does the big one go?"
+  },
+  {
+    "lang": "en",
+    "id": "cart-2-result",
+    "text": "The big gear turns the other way, and more slowly! One gear moves the other."
+  },
+  {
+    "lang": "en",
+    "id": "cart-3",
+    "text": "Turn the crank. The spring winds tighter and stores the energy from your hand. We are getting our car ready to go!"
+  },
+  {
+    "lang": "en",
+    "id": "cart-3-result",
+    "text": "The spring is wound! Now it has energy to turn the wheels."
+  },
+  {
+    "lang": "en",
+    "id": "cart-4",
+    "text": "Our car is ready. Let it go! The spring unwinds, turns the gears, and makes the car move."
+  },
+  {
+    "lang": "en",
+    "id": "cart-4-result",
+    "text": "It works! The spring turns the gears, and the gears turn the wheels. A car with no horse!"
+  },
+  {
+    "lang": "en",
+    "id": "knight-1",
+    "text": "Try bending your own elbow. This wooden arm has a joint too. Tap it and see how it bends."
+  },
+  {
+    "lang": "en",
+    "id": "knight-1-result",
+    "text": "A joint joins two parts of the arm and lets them bend."
+  },
+  {
+    "lang": "en",
+    "id": "knight-2",
+    "text": "Let us tie a cord to the arm. Pull the cord. What happens to the arm?"
+  },
+  {
+    "lang": "en",
+    "id": "knight-2-result",
+    "text": "The arm lifts! The cord carries your pull all the way to the arm."
+  },
+  {
+    "lang": "en",
+    "id": "knight-3",
+    "text": "Run the cord over this little wheel. It is called a pulley. Pull down and watch the arm!"
+  },
+  {
+    "lang": "en",
+    "id": "knight-3-result",
+    "text": "You pull down, but the arm goes up! The pulley changes the direction of your pull."
+  },
+  {
+    "lang": "en",
+    "id": "knight-4",
+    "text": "Here is the whole knight! This model is inspired by my drawings. Turn the crank. The knight will wave hello."
+  },
+  {
+    "lang": "en",
+    "id": "knight-4-result",
+    "text": "Hello there! The crank pulls cords, the joints bend, and the knight waves. Like a very old robot!"
+  }
+]
