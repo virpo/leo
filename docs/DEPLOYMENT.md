@@ -5,7 +5,9 @@
 - Public fallback: https://leo-gamma-one.vercel.app/
 - Intended domain: https://leo.virpo.sk/
 
-The app is static and has no API keys, server, database or runtime speech dependency. Build with `npm ci && npm run build`. Publish with `vercel deploy --prod --scope echt1`. Git integration can also deploy pushes to `main` after the repository connection is established.
+The app is static and has no API keys, server, database or runtime speech dependency. Build with `npm ci && npm run build`. Publish with `vercel deploy --prod --scope echt1`.
+
+The source is pushed to `main`. Automatic deploy-on-push is not connected: `vercel git connect` reports “You need to add a Login Connection to your GitHub account first. (400)”. Connecting GitHub in the Vercel account is an optional owner step. CLI production deployments already work.
 
 ## DNS handoff
 

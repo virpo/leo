@@ -10,4 +10,6 @@ Three screenshot polish passes unify controls and centre the title, action and s
 
 GitHub: `virpo/leo`. Vercel: `echt1/leo`. Public fallback: https://leo-gamma-one.vercel.app/. Custom domain is attached; Exohosting still needs the CNAME in [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
+Source is pushed to `main`. CLI production deployment works. Automatic Git integration needs an owner-side GitHub login connection in Vercel; do not claim pushes deploy automatically.
+
 Run `npm run check`, `npm run check:browser`, `npm run build`. Browser checks use localhost:5174 by default; set `LEO_TEST_URL` for production. Full-resolution QA files and old portraits remain locally in ignored `artifacts/`. No physical iPad has been tested.
