@@ -8,6 +8,10 @@ Three screenshot polish passes unify controls and centre the title, action and s
 
 ## Shipping
 
+The repository is open source. Original code, text, documentation and illustrations
+are MIT licensed. Preserve the third-party licenses and narration exclusion in
+`NOTICE.md`. The npm package stays private to prevent accidental npm publishing.
+
 GitHub: `virpo/leo`. Netlify: `leo-virpo`, team `virpo`. Public fallback: https://leo-virpo.netlify.app/. Corrected custom domain: `leo.virpo.io`. It is attached; Namecheap still needs the CNAME in [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
 Source is pushed to `main`. Netlify CLI production deployment works. Automatic Git deployment is not connected. Vercel’s separate `echt` identity blocked the committed build, so the existing authenticated Netlify account is the shipping host. No author identity or access policy was changed.

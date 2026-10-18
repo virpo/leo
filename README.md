@@ -49,3 +49,13 @@ Educational models are simplified, not engineering plans. The screw stays on the
 - Cormorant Garamond, DM Sans and Caveat are self-hosted. Their SIL Open Font Licences are in `public/fonts/`.
 
 Independent project. No museum affiliation.
+
+## License
+
+Open-source application under the [MIT License](LICENSE). Original code, text,
+documentation and illustrations are included. Third-party code and fonts retain
+their own licenses. Bundled narration recordings are excluded from the MIT grant;
+see [licenses and asset notes](NOTICE.md).
+
+The npm package remains marked `private` to prevent accidental package publication.
+This does not restrict the public source repository or its MIT license.

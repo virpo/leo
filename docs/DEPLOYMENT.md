@@ -1,6 +1,6 @@
 # 🪶 Deployment
 
-- Source: `github.com/virpo/leo`, private by default.
+- Source: `github.com/virpo/leo`, public and MIT licensed. Asset exceptions are listed in `NOTICE.md`.
 - Hosting: Netlify project `leo-virpo`, team `virpo` (Pumpkings).
 - Project ID: `fd834e3a-3d17-4016-9957-8d171ce7a691`.
 - Public fallback: https://leo-virpo.netlify.app/
