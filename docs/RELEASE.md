@@ -30,4 +30,6 @@ Earlier local work is included: touch-first narration, failed flying-screw attem
 
 ## Verdict
 
-Local functional checks pass. Production publication and live verification are the final release gate. Physical iPad Safari and a child play-test remain manual checks. The models remain educational simplifications, not engineering plans.
+Released on 2026-10-18 at https://leo.virpo.io/. All four browser suites pass against the public HTTPS hostname in Chrome and WebKit. All 100 live audio files return actual MP3 bytes. Source release: `510c15b`. Screenshot review found no new visual blockers. The final HTML metadata also describes the six-machine release.
+
+Physical iPad Safari and a child play-test remain manual checks. The models remain educational simplifications, not engineering plans. The existing native Slovak narrator is unchanged; alternative voice engines are a separate, pending choice.

@@ -14,7 +14,9 @@ Latest feedback pass: broadside paddle, stronger stroke-driven wakes, explicit B
 
 Release check adds correct, screen-scaled paddle dragging and arrow keys, alternating strokes, no boat reset during rapid taps, and an explicit Again state. Invalid step links and invalid saved language values recover safely. Release report: [docs/RELEASE.md](docs/RELEASE.md).
 
-Six-machine release candidate is validated and ready for production deployment. All work since the three-machine baseline is included in this release.
+Six-machine release is pushed to `main` and deployed at https://leo.virpo.io/ on 2026-10-18. Application source: `510c15b`. All four browser suites pass on the public hostname in Chrome and WebKit, including all 100 audio assets. All 27 unit tests pass. All work since the three-machine baseline is included.
+
+Next optional pass: audition a more expressive native Slovak narrator before changing any recordings. Peter asked about local/open models versus ElevenLabs. No new provider, subscription, model download or audio replacement has been authorized.
 
 ## Shipping
 
