@@ -4,14 +4,19 @@ import { readFile, writeFile, stat, mkdir, rename } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import { narrationManifest } from "../src/content.js";
 import { VOICE_SETTINGS } from "../src/voices.js";
-const clips = narrationManifest().filter((c) => c.lang === "sk"),
-  settings = VOICE_SETTINGS.sk;
-if (!settings.voice.startsWith("sk-SK-"))
+const lang = process.argv.find((arg) => arg.startsWith("--lang="))?.split("=")[1] || "sk";
+if (!["sk", "en"].includes(lang)) throw new Error("Unknown narration language");
+const machines = process.argv.find((arg) => arg.startsWith("--machines="))?.split("=")[1]?.split(",");
+const clips = narrationManifest().filter((c) => c.lang === lang && (!machines || machines.some((id) => c.id.startsWith(`${id}-`)))),
+  settings = VOICE_SETTINGS[lang];
+if (lang === "sk" && !settings.voice.startsWith("sk-SK-"))
   throw new Error("Native Slovak narrator required");
-const marker = "Koniec nahrávky.",
+if (!clips.length) throw new Error("No matching clips");
+const marker = lang === "sk" ? "Koniec nahrávky." : "End of recording.",
   text = clips.map((c) => `${c.text} ${marker}`).join("\n\n");
-const media = new URL("../artifacts/slovak-native-batch.mp3", import.meta.url),
-  subtitles = new URL("../artifacts/slovak-native-batch.srt", import.meta.url);
+const batch = machines ? `${lang}-expansion-batch` : "slovak-native-batch";
+const media = new URL(`../artifacts/${batch}.mp3`, import.meta.url),
+  subtitles = new URL(`../artifacts/${batch}.srt`, import.meta.url);
 function run(command, args) {
   return new Promise((resolve, reject) => {
     const child = spawn(command, args, { stdio: ["ignore", "pipe", "pipe"] });
@@ -34,6 +39,7 @@ if (process.argv.includes("--record")) {
         "--voice",
         settings.voice,
         `--rate=${settings.rate}`,
+        ...(settings.pitch === "+0Hz" ? [] : [`--pitch=${settings.pitch}`]),
         "--text",
         text,
         "--write-media",
@@ -113,7 +119,7 @@ let receipts = {};
 try {
   receipts = JSON.parse(await readFile(receiptFile, "utf8"));
 } catch {}
-await mkdir(new URL("../public/audio/sk/", import.meta.url), {
+await mkdir(new URL(`../public/audio/${lang}/`, import.meta.url), {
   recursive: true,
 });
 for (let i = 0; i < clips.length; i++) {
@@ -132,9 +138,9 @@ for (let i = 0; i < clips.length; i++) {
   const start = Math.max(0, before.end - 0.1),
     end = after.start + 0.18;
   if (end <= start) throw new Error(`Invalid speech boundaries for ${clip.id}`);
-  const output = new URL(`../public/audio/sk/${clip.id}.mp3`, import.meta.url),
+  const output = new URL(`../public/audio/${lang}/${clip.id}.mp3`, import.meta.url),
     pending = new URL(
-      `../public/audio/sk/${clip.id}.pending.mp3`,
+      `../public/audio/${lang}/${clip.id}.pending.mp3`,
       import.meta.url,
     );
   await run("ffmpeg", [
@@ -154,7 +160,7 @@ for (let i = 0; i < clips.length; i++) {
     pending.pathname,
   ]);
   await rename(pending, output);
-  receipts[`sk/${clip.id}`] = createHash("sha256")
+  receipts[`${lang}/${clip.id}`] = createHash("sha256")
     .update(JSON.stringify({ text: clip.text, ...settings }))
     .digest("hex");
   segments.push({
@@ -178,9 +184,9 @@ await writeFile(
   JSON.stringify(narrationManifest(), null, 2) + "\n",
 );
 await writeFile(
-  new URL("../artifacts/slovak-native-segments.json", import.meta.url),
+  new URL(`../artifacts/${batch}-segments.json`, import.meta.url),
   JSON.stringify(segments, null, 2) + "\n",
 );
 console.log(
-  "All Slovak clips are native Lukáš. No English narrator or accent fallback.",
+  `${lang}: ${clips.length} clips recorded with ${settings.voice}.`,
 );

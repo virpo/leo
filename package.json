@@ -12,8 +12,11 @@
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0",
-    "check": "node --test tests/model.test.mjs",
+    "check": "node --test tests/*.test.mjs",
     "check:browser": "node tests/browser.mjs",
+    "check:ux": "node tests/browser-ux.mjs",
+    "check:experiments": "node tests/browser-experiments.mjs",
+    "check:release": "node tests/browser-release.mjs",
     "audio:generate": "node scripts/generate-narration.mjs"
   },
   "devDependencies": {

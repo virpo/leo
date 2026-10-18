@@ -1,6 +1,8 @@
 import * as K from "./vendor/iso-kit.mjs";
 import * as G from "./vendor/lathe.mjs";
-import { TAU, knightAt, gearAngles, gearProfile, GEAR_PLANE } from "./model.js";
+import { TAU, knightAt, gearAngles, gearProfile, GEAR_PLANE, springAt } from "./model.js";
+import { extraScene } from "./extra-art.js";
+import { boatAt } from "./experiments.js";
 
 const W = 600,
   H = 460;
@@ -47,6 +49,9 @@ class Scene {
         azimuth: 68,
         elevation: 16,
       },
+      parachute: { bounds: { x: -140, y: -80, w: 280, d: 160, r: 0 }, top: 280, azimuth: step >= 2 && !preview ? 90 : 24, elevation: 16 },
+      boat: { bounds: { x: -164, y: -78, w: 328, d: 156, r: 0 }, top: 100, azimuth: 48, elevation: 26 },
+      lock: { bounds: { x: -178, y: -50, w: 356, d: 100, r: 0 }, top: 124, azimuth: 132, elevation: 28 },
     };
     const c = configs[kind];
     const pts = [...K.boxCorners(c.bounds, 0, 0), [0, 0, c.top]];
@@ -415,26 +420,26 @@ function gear(s, id, x, y, z, r, teeth, angle) {
   s.bolt(id + "pin", [x, y, z + 8]);
 }
 
-function spring(s, id, x, y, z, charge = 0) {
-  s.cyl(id + "drum", x, y, z, 20, 4, { tone: "mid" });
-  const pts = [];
-  for (let i = 0; i <= 150; i++) {
-    const t = i / 150,
-      a = t * TAU * (2.2 + charge * 1.4),
-      r = 3 + t * (14 - charge * 3);
+function spring(s, id, x, y, z, charge = 0, radius = 20) {
+  s.cyl(id + "drum", x, y, z, radius, 4, { tone: "mid" });
+  const winding = springAt(charge), pts = [];
+  for (let i = 0; i <= 220; i++) {
+    const t = i / 220,
+      a = TAU * 0.2 - (1 - t) * TAU * winding.turns,
+      r = 3 + (radius - 5) * t ** winding.exponent;
     pts.push([x + Math.cos(a) * r, y + Math.sin(a) * r, z + 4.3]);
   }
-  s.line(id + "coil", s.path(pts), [x, y, z + 4.3], "hi");
+  s.line(id + "coil", s.path(pts), [x, y, z + 4.3], "hi", { tension: winding.tension });
   s.cyl(id + "axle", x, y, z + 4, 3, 6, { tone: "hi" });
   const tip = pts.at(-1),
     outward = G.add3(
       [x, y, z + 4.3],
       G.mul3(
         G.sub3(tip, [x, y, z + 4.3]),
-        19 / Math.hypot(tip[0] - x, tip[1] - y),
+        (radius - 1) / Math.hypot(tip[0] - x, tip[1] - y),
       ),
     );
-  s.line(id + "terminal", s.path([tip, outward]), xyz(tip, outward, 0.5), "hi");
+  s.line(id + "terminal", s.path([tip, outward]), xyz(tip, outward, 0.5), "hi", { tension: winding.tension });
   s.bolt(id + "spring-anchor", outward, 0.75);
 }
 
@@ -463,7 +468,7 @@ function cart(step, v = {}) {
     gear(s, "driver", -34, 0, GEAR_PLANE, 18, 12, g.driver);
     gear(s, "follower", 20, 0, GEAR_PLANE, 36, 24, g.follower);
     if (step === 2) {
-      spring(s, "spring", -34, 0, 57, v.charge || 0);
+      spring(s, "spring", -34, 0, 57, v.charge || 0, 27);
       const end = [-34 + 26 * Math.cos(a), 26 * Math.sin(a), 76];
       s.rod("winding-shaft", [-34, 0, 50], [-34, 0, 76], 2.8, { tone: "hi" });
       s.rod("winding", [-34, 0, 76], end, 2.3, { tone: "hi" });
@@ -724,7 +729,7 @@ function knight(step, v = {}) {
       Math.hypot(...G.sub3(liveTarget, pulleyExit));
     const end =
       step === 1
-        ? [target[0] + 28, 10, target[2] + 32]
+        ? [target[0] + 43, 20, target[2] + 60]
         : [anchor[0] - 9, anchor[1] + 5, 118 - ropeDelta];
     s.bolt("grip-cord-eyelet", end, 1.5);
     if (step === 1) {
@@ -733,8 +738,9 @@ function knight(step, v = {}) {
         s.path([G.add3(target, [0, 7, 0]), end]),
         xyz(target, end, 0.5),
         "hi",
+        { cord: true },
       );
-      s.rod("cord-grip", end, G.add3(end, [0, 0, 9]), 2.5, { tone: "hi" });
+      s.rod("cord-grip", G.add3(end, [-12, 0, 3]), G.add3(end, [12, 0, 3]), 3.3, { tone: "hi" });
     } else {
       const pulley = anchor,
         F = G.frameAlong(pulley, [0, 1, 0]);
@@ -750,13 +756,14 @@ function knight(step, v = {}) {
           anchor[2] + Math.sin(a) * 9,
         ]);
       }
-      s.line("cord-up", s.path([end, left]), xyz(end, left, 0.5), "hi");
-      s.line("cord-over", s.path(arc), G.add3(anchor, [0, 5, 7]), "hi");
+      s.line("cord-up", s.path([end, left]), xyz(end, left, 0.5), "hi", { cord: true });
+      s.line("cord-over", s.path(arc), G.add3(anchor, [0, 5, 7]), "hi", { cord: true });
       s.line(
         "cord-down",
         s.path([right, G.add3(target, [0, 7, 0])]),
         xyz(right, target, 0.5),
         "hi",
+        { cord: true },
       );
       s.rod("cord-grip", end, G.add3(end, [0, 0, -9]), 2.5, { tone: "hi" });
       if (!full)
@@ -777,8 +784,14 @@ function knight(step, v = {}) {
 }
 
 export function sceneAt(kind, step = 3, v = {}) {
-  const s = { screw, cart, knight }[kind](step, v);
+  const s = ["parachute", "boat", "lock"].includes(kind)
+    ? extraScene(kind, step, v, Scene)
+    : { screw, cart, knight }[kind](step, v);
   s.items.sort((a, b) => a.key - b.key);
+  if (s.constructedLayers) {
+    const rank = (item) => item.id.startsWith("floor-seam") ? 0 : /^(canal-back|canal-end|wall-|tray-|tank-divider)/.test(item.id) ? 1 : item.wake ? 3 : item.water ? 2 : 4;
+    s.items.sort((a, b) => rank(a) - rank(b) || a.key - b.key);
+  }
   if (s.foundation) s.items.unshift(...s.foundation);
   if (kind === "screw") {
     const onBase = (id) => /^(foot\d|platform$|deck-?\d|peg\d)/.test(id);
@@ -792,9 +805,9 @@ export function sceneAt(kind, step = 3, v = {}) {
 
 function markup(item) {
   if (item.type === "solid")
-    return `<g data-part="${item.id}"><g class="iso-solid" ${item.paths.seamless ? "data-seamless" : ""}><path class="iso-fill" d="${item.paths.fill}" fill-rule="${item.style.fillRule || (item.id.includes("rim") ? "evenodd" : "nonzero")}"/>${item.paths.shades.map((d, i) => `<path class="iso-shade" data-shade="${i}" d="${d}"/>`).join("")}<path class="iso-line iso-side-edge" data-tone="${item.style.tone || "hi"}" d="${item.paths.sideOutline || ""}"/><path class="iso-top" d="${item.paths.top}"/><path class="iso-line iso-crease" data-tone="faint" d="${item.paths.crease}"/><path class="iso-line iso-bevel" data-tone="faint" d="${item.paths.bevel || ""}"/><path class="iso-line iso-edge" data-tone="${item.style.tone || "hi"}" d="${item.paths.outline}"/></g></g>`;
+    return `<g data-part="${item.id}"${item.style.underwater ? ' class="underwater"' : ""}><g class="iso-solid" ${item.paths.seamless ? "data-seamless" : ""}><path class="iso-fill" d="${item.paths.fill}" fill-rule="${item.style.fillRule || (item.id.includes("rim") ? "evenodd" : "nonzero")}"/>${item.paths.shades.map((d, i) => `<path class="iso-shade" data-shade="${i}" d="${d}"/>`).join("")}<path class="iso-line iso-side-edge" data-tone="${item.style.tone || "hi"}" d="${item.paths.sideOutline || ""}"/><path class="iso-top" d="${item.paths.top}"/><path class="iso-line iso-crease" data-tone="faint" d="${item.paths.crease}"/><path class="iso-line iso-bevel" data-tone="faint" d="${item.paths.bevel || ""}"/><path class="iso-line iso-edge" data-tone="${item.style.tone || "hi"}" d="${item.paths.outline}"/></g></g>`;
   if (item.type === "line")
-    return `<g data-part="${item.id}">${K.lineSvg(item.d, { tone: item.tone, free: item.free })}</g>`;
+    return `<g data-part="${item.id}"${item.underwater ? ' class="underwater"' : item.cord ? ' class="pull-cord"' : ""}${item.tension !== undefined ? ` class="spring-strand" style="--spring-energy:${item.tension * 100}%" data-tension="${item.tension.toFixed(3)}"` : ""}>${K.lineSvg(item.d, { tone: item.tone, free: item.free })}</g>`;
   if (item.type === "dot")
     return `<g data-part="${item.id}"><g class="iso-dots" data-tone="hi"><circle cx="${item.q[0]}" cy="${item.q[1]}" r="${item.r}"/></g></g>`;
   return `<g data-part="${item.id}"><path class="art-custom" d="${item.d}" fill="${item.fill}" stroke="${item.stroke}" stroke-width="${item.width}" stroke-linejoin="round" stroke-linecap="round"/></g>`;
@@ -802,10 +815,20 @@ function markup(item) {
 
 export function artMarkup(kind, step = 3, v = {}, extra = "") {
   const s = sceneAt(kind, step, v);
-  return `<svg class="machine-art iso-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${kind === "screw" ? "Leonardo’s spiral flying machine" : kind === "cart" ? "A wooden spring-powered cart with visible gears" : "A friendly mechanical knight with cords and pulleys"}" ${extra}><g class="drawing-parts">${s.items.map(markup).join("")}</g></svg>`;
+  const ground = kind === "screw" && step === 3
+    ? `<path class="ground-contact" d="${K.haloOf({ x: -84, y: -84, w: 168, d: 168, r: 84 }, -6, 1, s.P)}"/>`
+    : "";
+  return `<svg class="machine-art iso-svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${kind === "screw" ? "Leonardo’s spiral flying machine" : kind === "cart" ? "A wooden spring-powered cart with visible gears" : "A friendly mechanical knight with cords and pulleys"}" ${extra}>${ground}<g class="drawing-parts">${s.items.map(markup).join("")}</g></svg>`;
 }
 
 function touchPoint(kind, step, v) {
+  if (kind === "parachute") return step === 0 ? [28, 0, 155 - (v.fall || 0) * 140 + (v.bounce || 0)] : [step >= 2 ? 72 : 0, 0, 220 - (v.fall || 0) * 140 + (v.bounce || 0)];
+  if (kind === "boat") {
+    const a = v.angle || 0, motion = boatAt(a, step);
+    return step === 0 ? [35 - 70 * motion.stroke, -45, 82]
+      : [motion.distance + 16 * Math.sin(a), 59, 43 + 16 * Math.cos(a)];
+  }
+  if (kind === "lock") return [step === 3 ? 57 : step === 0 ? 0 : 22, -25, 113];
   if (kind === "screw") {
     const a = v.angle || 0;
     return [49 * Math.cos(a), 49 * Math.sin(a), 42];
@@ -826,7 +849,7 @@ function touchPoint(kind, step, v) {
   if (step === 1) {
     const p = knightAt(v.lift || 0);
     const t = xyz(p.elbow, p.hand, 0.78);
-    return [t[0] + 28, 10, t[2] + 36];
+    return [t[0] + 43, 20, t[2] + 63];
   }
   if (step === 2) return [19, 19, 100];
   return [0, 22, 130];
@@ -835,6 +858,15 @@ function touchPoint(kind, step, v) {
 export function mountArt(element, kind, step, v = {}) {
   element.innerHTML = artMarkup(kind, step, v);
   const svg = element.querySelector("svg");
+  const projection = sceneAt(kind, step, v).P;
+  // The rightmost foot stays planted. This is an illustrative failed lift,
+  // never a hover. The footprint stays on the ground behind the moving art.
+  const groundedFoot = kind === "screw" && step === 3
+    ? K.iso([71 * Math.sin(0.3), -71 * Math.cos(0.3), -6], sceneAt(kind, step, v).P)
+    : null;
+  const rockTransform = (values) => groundedFoot
+    ? `rotate(${values.rock || 0} ${groundedFoot[0]} ${groundedFoot[1]})`
+    : "";
   const ns = "http://www.w3.org/2000/svg";
   const cue = document.createElementNS(ns, "g");
   cue.setAttribute("class", "touch-cue");
@@ -856,7 +888,7 @@ export function mountArt(element, kind, step, v = {}) {
       scale = svg.getScreenCTM()?.a || 1;
     cue.setAttribute(
       "transform",
-      `translate(${p[0]} ${p[1]}) scale(${1 / scale})`,
+      `${rockTransform(values)} translate(${p[0]} ${p[1]}) scale(${1 / scale})`,
     );
   };
   placeCue(v);
@@ -873,17 +905,35 @@ export function mountArt(element, kind, step, v = {}) {
     const scene = sceneAt(
       kind,
       step,
-      kind === "cart" && step === 3 ? { ...values, distance: 0 } : values,
+      kind === "cart" && step === 3 ? { ...values, distance: 0 }
+        : kind === "parachute" ? { ...values, fall: 0, fallSmall: 0, bounce: 0, bounceSmall: 0 }
+        : kind === "boat" && step >= 2 ? { ...values, vesselX: 0 }
+        : values,
     );
     if (kind === "cart" && step === 3)
       container.setAttribute(
         "transform",
         K.translateAlong(scene.P, [values.distance || 0, 0, 0]),
       );
+    if (kind === "screw" && step === 3) {
+      container.setAttribute("transform", rockTransform(values));
+      svg.dataset.attempt = values.rock > 0 ? "straining" : "grounded";
+      svg.dataset.rock = String(values.rock || 0);
+    }
     for (const item of scene.items) {
       const el = nodes.get(item.id);
       if (!el) continue;
+      let translation = null;
+      if (kind === "parachute" && /^(chute-|small-|big-)/.test(item.id) && !item.id.endsWith("shadow"))
+        translation = [0, 0, -140 * (item.id.startsWith("small-") ? values.fallSmall || 0 : values.fall || 0) + (item.id.startsWith("small-") ? values.bounceSmall || 0 : values.bounce || 0)];
+      else if (kind === "boat" && step >= 2 && /^(boat-|wheel|bearing|paddle-axle|rudder)/.test(item.id))
+        translation = [boatAt(values.angle || 0, step).distance, 0, 0];
+      if (translation) {
+        const transform = K.translateAlong(scene.P, translation);
+        if (el.getAttribute("transform") !== transform) el.setAttribute("transform", transform);
+      }
       const prev = records.get(item.id);
+      el.classList.toggle("underwater", !!(item.style?.underwater || item.underwater));
       if (item.type === "solid") {
         for (const [field, selector] of [
           ["fill", ".iso-fill"],
@@ -913,6 +963,10 @@ export function mountArt(element, kind, step, v = {}) {
       }
       if (item.type === "custom" && (!prev || prev.fill !== item.fill))
         el.querySelector("path")?.setAttribute("fill", item.fill);
+      if (item.tension !== undefined && item.tension !== prev?.tension) {
+        el.style.setProperty("--spring-energy", `${item.tension * 100}%`);
+        el.dataset.tension = item.tension.toFixed(3);
+      }
       records.set(item.id, item);
     }
     const order = scene.items.map((i) => i.id).join(",");
@@ -927,15 +981,17 @@ export function mountArt(element, kind, step, v = {}) {
       scale = svg.getScreenCTM()?.a || 1;
     cue.setAttribute(
       "transform",
-      `translate(${p[0]} ${p[1]}) scale(${1 / scale})`,
+      `${rockTransform(values)} translate(${p[0]} ${p[1]}) scale(${1 / scale})`,
     );
   };
   update.destroy = () => resize.disconnect();
+  update.worldDx = (screenDx) => screenDx /
+    (K.axisVector(projection, [1, 0, 0])[0] * (svg.getScreenCTM()?.a || 1));
   update.angleAt = (clientX, clientY) => {
     const P = sceneAt(kind, step, v).P,
       c = K.cameraOf(P);
     const q = new DOMPoint(clientX, clientY).matrixTransform(
-      svg.getScreenCTM().inverse(),
+      (groundedFoot ? container : svg).getScreenCTM().inverse(),
     );
     const horizontal = kind === "screw" || (kind === "cart" && step > 0);
     const center =

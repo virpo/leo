@@ -8,6 +8,9 @@ import {
   cartAt,
   knightAt,
   follow,
+  screwAttemptAt,
+  springAt,
+  MACHINES,
 } from "../src/model.js";
 import { CONTENT, narrationManifest } from "../src/content.js";
 import { VOICE_SETTINGS } from "../src/voices.js";
@@ -15,16 +18,37 @@ import { sceneAt } from "../src/art.js";
 import { iso } from "../src/vendor/iso-kit.mjs";
 import { stat, readFile } from "node:fs/promises";
 
-test("both languages have the same twelve lessons and bundled narration", async () => {
+test("failed lift has two bounded efforts and returns completely to ground", () => {
+  assert.equal(screwAttemptAt(0), 0);
+  assert.equal(screwAttemptAt(1), 0);
+  assert.equal(screwAttemptAt(5), 0);
+  assert.equal(screwAttemptAt(0.45), 0);
+  assert.equal(screwAttemptAt(0.32), 2.5);
+  assert.equal(screwAttemptAt(0.76), 6.5);
+  for (let i = 0; i <= 200; i++) assert.ok(screwAttemptAt(i / 200) >= 0 && screwAttemptAt(i / 200) <= 6.5);
+});
+test("spring tightens around a fixed outer anchor, then loses tension with energy", () => {
+  assert.ok(springAt(1).turns > springAt(0).turns);
+  assert.ok(springAt(1).exponent > springAt(0).exponent);
+  const anchor = (charge) => sceneAt("cart", 2, { charge }).items.find((i) => i.id === "springspring-anchor").at;
+  const terminal = (charge) => sceneAt("cart", 2, { charge }).items.find((i) => i.id === "springterminal").d;
+  assert.deepEqual(anchor(0), anchor(1));
+  assert.equal(terminal(0), terminal(1));
+  const coils = (energy) => sceneAt("cart", 3, { energy }).items.filter((i) => /spring[AB]coil/.test(i.id));
+  assert.ok(coils(1).every((i) => i.tension === 1));
+  assert.ok(coils(0).every((i) => i.tension === 0));
+});
+
+test("both languages have the same twenty-four lessons and bundled narration", async () => {
   for (const lang of ["sk", "en"])
-    for (const id of ["screw", "cart", "knight"]) {
+    for (const { id } of MACHINES) {
       assert.equal(CONTENT[lang].machines[id].steps.length, 4);
       for (const step of CONTENT[lang].machines[id].steps)
         for (const key of ["title", "action", "voice", "result"])
           assert.ok(step[key].length > 0);
     }
   const clips = narrationManifest();
-  assert.equal(clips.length, 52);
+  assert.equal(clips.length, 100);
   assert.deepEqual(
     JSON.parse(
       await readFile(

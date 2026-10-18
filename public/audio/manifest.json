@@ -130,6 +130,126 @@
     "text": "Ahoj! Kľuka ťahá za šnúrky, kĺby sa ohýbajú a rytier máva. Ako dávny robot!"
   },
   {
+    "lang": "sk",
+    "id": "parachute-1",
+    "text": "Pusti malý košík. Zem ho priťahuje nadol. Táto sila sa volá gravitácia."
+  },
+  {
+    "lang": "sk",
+    "id": "parachute-1-result",
+    "text": "Košík spadol rýchlo. Zem ho ťahá stále nadol."
+  },
+  {
+    "lang": "sk",
+    "id": "parachute-2",
+    "text": "Pridáme plachtu. Vzduch jej kladie odpor a spomalí pád. Pusti ten istý košík."
+  },
+  {
+    "lang": "sk",
+    "id": "parachute-2-result",
+    "text": "S plachtou padá košík pomalšie. Vzduch ho brzdí!"
+  },
+  {
+    "lang": "sk",
+    "id": "parachute-3",
+    "text": "Dva rovnaké košíky, dva rôzne veľké padáky. Pusti ich naraz. Ktorý pristane neskôr?"
+  },
+  {
+    "lang": "sk",
+    "id": "parachute-3-result",
+    "text": "Väčší padák padá pomalšie. Väčšia plachta kladie vzduchu väčší odpor."
+  },
+  {
+    "lang": "sk",
+    "id": "parachute-4",
+    "text": "Ľavý padák zostane rovnaký. Pravý zmenši mínusom alebo zväčši plusom. Potom pusť oba a porovnaj ich."
+  },
+  {
+    "lang": "sk",
+    "id": "parachute-4-result",
+    "text": "Pristáli sme! Skús inú veľkosť plachty a porovnaj pád."
+  },
+  {
+    "lang": "sk",
+    "id": "boat-1",
+    "text": "Potiahni lopatku cez vodu. Pozri, ktorým smerom sa voda pohne."
+  },
+  {
+    "lang": "sk",
+    "id": "boat-1-result",
+    "text": "Lopatka tlačí vodu dozadu. Takto môžeme poháňať loď."
+  },
+  {
+    "lang": "sk",
+    "id": "boat-2",
+    "text": "Na koleso pripevníme viac lopatiek. Roztoč ho. Jedna lopatka vychádza a ďalšia už tlačí na vodu."
+  },
+  {
+    "lang": "sk",
+    "id": "boat-2-result",
+    "text": "Koleso opakuje záber stále dookola. Vodu tlačí dozadu."
+  },
+  {
+    "lang": "sk",
+    "id": "boat-3",
+    "text": "Dve kolesá spojíme jednou osou. Otáčaj kľukou. Voda ide dozadu a loď dopredu."
+  },
+  {
+    "lang": "sk",
+    "id": "boat-3-result",
+    "text": "Ide to! Lopatky tlačia na vodu a voda tlačí na loď opačným smerom."
+  },
+  {
+    "lang": "sk",
+    "id": "boat-4",
+    "text": "Čo sa stane, keď otočíme kolesá naopak? Skús to. Alebo ich otáčaj prstom na modeli."
+  },
+  {
+    "lang": "sk",
+    "id": "boat-4-result",
+    "text": "Aj loď zmení smer! Kolesá tlačia vodu opačne, a tak sa obráti aj pohyb lode."
+  },
+  {
+    "lang": "sk",
+    "id": "lock-1",
+    "text": "Na jednej strane je viac vody. Otvor malý prietok. Sleduj obe hladiny."
+  },
+  {
+    "lang": "sk",
+    "id": "lock-1-result",
+    "text": "Voda tečie z vyššej hladiny k nižšej. Napokon sú obe rovnako vysoko."
+  },
+  {
+    "lang": "sk",
+    "id": "lock-2",
+    "text": "Loď pláva v komore. Pusť dnu vodu a sleduj, čo sa stane s loďou."
+  },
+  {
+    "lang": "sk",
+    "id": "lock-2-result",
+    "text": "Stúpa voda aj loď! Loď nepotrebuje výťahové lano. Drží ju voda."
+  },
+  {
+    "lang": "sk",
+    "id": "lock-3",
+    "text": "Hladiny sú teraz rovnako vysoko. Otvor veľkú bránu. Voda sa nevyvalí z vyššej strany."
+  },
+  {
+    "lang": "sk",
+    "id": "lock-3-result",
+    "text": "Brána sa otvorila. Keď sa hladiny vyrovnajú, loď môže bezpečne prejsť."
+  },
+  {
+    "lang": "sk",
+    "id": "lock-4",
+    "text": "Dostaň loď do vyššieho kanála. Zatvor dolnú bránu, napusti vodu, otvor hornú bránu a pusť loď ďalej."
+  },
+  {
+    "lang": "sk",
+    "id": "lock-4-result",
+    "text": "Dokázal si to! Komora zdvihla loď na vyššiu hladinu. Je to vodný výťah."
+  },
+  {
     "lang": "en",
     "id": "hello",
     "text": "Hello! I am Leo. I love dreaming up new things. Pick a machine and come and play!"
@@ -258,5 +378,125 @@
     "lang": "en",
     "id": "knight-4-result",
     "text": "Hello there! The crank pulls cords, the joints bend, and the knight waves. Like a very old robot!"
+  },
+  {
+    "lang": "en",
+    "id": "parachute-1",
+    "text": "Let the little basket go. Earth pulls it down. That pull is called gravity."
+  },
+  {
+    "lang": "en",
+    "id": "parachute-1-result",
+    "text": "The basket fell quickly. Gravity keeps pulling it down."
+  },
+  {
+    "lang": "en",
+    "id": "parachute-2",
+    "text": "Add a canopy. Air pushes against it and slows the fall. Drop the same basket again."
+  },
+  {
+    "lang": "en",
+    "id": "parachute-2-result",
+    "text": "With a canopy, the basket falls more slowly. Air is a brake!"
+  },
+  {
+    "lang": "en",
+    "id": "parachute-3",
+    "text": "Two matching baskets, two different canopy sizes. Drop them together. Which one lands last?"
+  },
+  {
+    "lang": "en",
+    "id": "parachute-3-result",
+    "text": "The bigger canopy falls more slowly. More area makes more air resistance."
+  },
+  {
+    "lang": "en",
+    "id": "parachute-4",
+    "text": "The left parachute stays the same. Make the right one smaller with minus or bigger with plus. Then drop them together and compare."
+  },
+  {
+    "lang": "en",
+    "id": "parachute-4-result",
+    "text": "We landed! Try a different canopy size and compare the fall."
+  },
+  {
+    "lang": "en",
+    "id": "boat-1",
+    "text": "Pull this paddle through the water. Watch which way the water moves."
+  },
+  {
+    "lang": "en",
+    "id": "boat-1-result",
+    "text": "The paddle pushes water backward. That can help us move a boat."
+  },
+  {
+    "lang": "en",
+    "id": "boat-2",
+    "text": "Put more paddles on a wheel. Turn it. As one paddle comes out, another pushes against the water."
+  },
+  {
+    "lang": "en",
+    "id": "boat-2-result",
+    "text": "The wheel repeats the stroke, pushing water backward."
+  },
+  {
+    "lang": "en",
+    "id": "boat-3",
+    "text": "Join two wheels with one axle. Turn the crank. Water goes backward and the boat goes forward."
+  },
+  {
+    "lang": "en",
+    "id": "boat-3-result",
+    "text": "It works! The paddles push water, and water pushes the boat the other way."
+  },
+  {
+    "lang": "en",
+    "id": "boat-4",
+    "text": "What happens if we turn the wheels the other way? Try it. You can also turn them with your finger on the model."
+  },
+  {
+    "lang": "en",
+    "id": "boat-4-result",
+    "text": "The boat changes direction too! Reverse the push on the water and you reverse the boat."
+  },
+  {
+    "lang": "en",
+    "id": "lock-1",
+    "text": "One side has a higher water level. Open the little sluice. Watch both water levels."
+  },
+  {
+    "lang": "en",
+    "id": "lock-1-result",
+    "text": "Water flows from the higher side to the lower side. The levels meet."
+  },
+  {
+    "lang": "en",
+    "id": "lock-2",
+    "text": "The boat is floating in a chamber. Let water in and watch what happens to the boat."
+  },
+  {
+    "lang": "en",
+    "id": "lock-2-result",
+    "text": "The water rises, and so does the boat! Water holds it up, not a lifting rope."
+  },
+  {
+    "lang": "en",
+    "id": "lock-3",
+    "text": "The water is equally high on both sides. Open the big gate. Water will not rush in from a higher side."
+  },
+  {
+    "lang": "en",
+    "id": "lock-3-result",
+    "text": "The gate opens. When the levels match, the boat can pass through."
+  },
+  {
+    "lang": "en",
+    "id": "lock-4",
+    "text": "Get the boat to the higher canal. Close the lower gate, let water in, open the upper gate, then let the boat through."
+  },
+  {
+    "lang": "en",
+    "id": "lock-4-result",
+    "text": "You did it! The chamber raised the boat to the higher water. A water-powered lift!"
   }
 ]

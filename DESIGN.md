@@ -2,7 +2,7 @@
 
 An independent, museum-inspired interactive notebook for ages 5–9, with visual cause and effect and optional narration for younger children.
 
-## Three choices
+## Original three choices
 
 Flying screw, wind-up cart, mechanical knight. Flight, vehicles and a friendly moving character offer different motivations and different mechanisms. NAEYC's age-and-stage toy guidance supports transportation, construction, pretend characters and exploratory play. These are design judgments, not a measured popularity ranking.
 
@@ -13,6 +13,8 @@ Four steps each, one cause and one visible result per step:
 | Flying screw      | Turn a shaft          | Add a spiral sail      | Compare slow and fast rotation  | Test the complete idea, discover that it stays grounded |
 | Wind-up car       | Roll a wheel and axle | Mesh two gears         | Store energy in a spring        | Release the spring to drive the cart                    |
 | Mechanical knight | Bend a hinged arm     | Pull a cord to bend it | Redirect the pull with a pulley | Turn a crank to make the complete knight wave           |
+
+The workshop now also includes a parachute, paddle boat and canal lock. Their research, four-step concepts, parts lists, fair-test constraints and verification are in [Air and water](docs/EXPANSION.md).
 
 ## Anatomy drawing plan
 
@@ -39,7 +41,7 @@ These are simplified educational models. The screw does not actually fly. A fixe
 
 The notebook became a fixed-screen iPad exhibit after Peter's play-test feedback. Keep big titles, models and one large action. Leo explains by voice, not paragraphs. No footnotes, figure metadata, idle tours or automatic machines. Those Anatomy defaults are intentionally overridden by the child-first brief.
 
-Leo began as a four-tone vector puppet, then became an original Renaissance-style pen-and-ink portrait after Peter asked for more artistry. The face stays expressive while the robe shading fades into the parchment. An isolated matching mouth frame moves only during actual speech. SK / EN changes the full interface and 52 bundled recordings. Slovak now uses native Lukáš, not the English-accented multilingual voice. English keeps Andrew.
+Leo began as a four-tone vector puppet, then became an original Renaissance-style pen-and-ink portrait after Peter asked for more artistry. The face stays expressive while the robe shading fades into the parchment. An isolated matching mouth frame moves only during actual speech. SK / EN changes the full interface and 100 bundled recordings. Slovak now uses native Lukáš, not the English-accented multilingual voice. English keeps Andrew.
 
 The cart gears use a shared 20° involute profile and module, coplanar faces and a 2:1 opposite rotation ratio. The winding crank follows its shaft angle. The gear fill rule is nonzero; hollow wheel rims alone use evenodd. The former global evenodd fill created false holes in concave solid gears. Preview and lesson camera geometry have separate cache namespaces.
 

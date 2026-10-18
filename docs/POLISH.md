@@ -23,4 +23,4 @@ Physical iPad Safari and a child play-test remain manual checks. Browser emulati
 
 ## Verdict
 
-Visual pass. The independent final screenshot review found no visible tooth overlaps, exposed hidden edges or abrupt contour defects in four 4× gear-contact views. All twelve resting lessons have zero floating line ends and clean browser consoles. Physical tablet testing remains the next product check. Custom-domain publication waits only on the external DNS record, not on the website build.
+Visual pass. The independent final screenshot review found no visible tooth overlaps, exposed hidden edges or abrupt contour defects in four 4× gear-contact views. All twelve resting lessons have zero floating line ends and clean browser consoles. Physical tablet testing remains the next product check. The subsequent [interaction pass](INTERACTION.md) adds narration sequencing, explicit Home navigation, spring tension and the screw's failed attempt. The custom-domain DNS record now resolves; HTTPS was still pending at the last check.

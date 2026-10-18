@@ -1,6 +1,7 @@
 import { chromium, webkit } from "playwright";
 import assert from "node:assert/strict";
 import sharp from "sharp";
+import { MACHINES } from "../src/model.js";
 const url = process.env.LEO_TEST_URL || "http://localhost:5174";
 const failures = [],
   shots = [];
@@ -17,7 +18,7 @@ for (const engine of [chromium, webkit]) {
   page.on("pageerror", (e) => failures.push(`${engine.name()}: ${e.message}`));
   await page.goto(`${url}/#sk`);
   await page.evaluate(() => document.fonts.ready);
-  assert.equal(await page.locator(".machine-choice").count(), 3);
+  assert.equal(await page.locator(".machine-choice").count(), 6);
   await page.locator(".leo-button").tap();
   await page.waitForFunction(() =>
     document.querySelector("#app").classList.contains("speaking"),
@@ -54,7 +55,7 @@ for (const engine of [chromium, webkit]) {
   );
   await page.locator(".sound-button").tap();
   for (const lang of ["sk", "en"])
-    for (const machine of ["screw", "cart", "knight"])
+    for (const { id: machine } of MACHINES)
       for (let step = 1; step <= 4; step++) {
         await page.goto(`${url}/#${lang}/${machine}/${step}`);
         await page.locator(".art-host svg").waitFor();
@@ -72,7 +73,7 @@ for (const engine of [chromium, webkit]) {
           initial,
           `${machine}/${step} responds to child`,
         );
-        if (lang === "sk" && engine === chromium) {
+        if (lang === "sk" && engine === chromium && ["screw", "cart", "knight"].includes(machine)) {
           const shot = await sharp(await page.screenshot())
             .resize(472, 296)
             .toBuffer();
@@ -89,9 +90,10 @@ for (const engine of [chromium, webkit]) {
     { width: 1024, height: 672 },
     { width: 820, height: 1060 },
     { width: 768, height: 950 },
+    { width: 390, height: 844 },
   ]) {
     await page.setViewportSize(size);
-    for (const route of ["sk", "en/screw/4", "sk/cart/3", "en/knight/4"]) {
+    for (const route of ["sk", "en/screw/4", "sk/cart/3", "en/knight/4", "sk/parachute/3", "en/parachute/4", "en/boat/4", "sk/lock/4"]) {
       await page.goto(`${url}/#${route}`);
       await page.evaluate(() => document.fonts.ready);
       const check = await page.evaluate(() => {
@@ -110,6 +112,10 @@ for (const engine of [chromium, webkit]) {
           .map((e) => e.outerHTML.slice(0, 100));
         return {
           bad,
+          blocked: [...document.querySelectorAll(".action-row button:not(:disabled)")].filter((button) => {
+            const b = button.getBoundingClientRect();
+            return !button.contains(document.elementFromPoint(b.x + b.width / 2, b.y + b.height / 2));
+          }).map((button) => button.outerHTML.slice(0, 100)),
           width: document.documentElement.scrollWidth,
           height: document.documentElement.scrollHeight,
           w: innerWidth,
@@ -123,6 +129,7 @@ for (const engine of [chromium, webkit]) {
       );
       assert.equal(check.width, check.w);
       assert.equal(check.height, check.h);
+      assert.deepEqual(check.blocked, [], `${route}: every action target must sit above the portrait`);
       if (route.includes("/")) {
         const alignment = await page.evaluate(() => {
           const center = (selector) => {
@@ -130,15 +137,16 @@ for (const engine of [chromium, webkit]) {
             return b.x + b.width / 2;
           };
           const dots = [...document.querySelectorAll(".step-dots button")].map((b) => b.getBoundingClientRect());
+          const actions = [...document.querySelectorAll(".action-row button")].map((b) => b.getBoundingClientRect());
           return {
             title: center(".step-title"),
-            action: center(".action-button"),
+            action: (Math.min(...actions.map((b) => b.left)) + Math.max(...actions.map((b) => b.right))) / 2,
             steps: center(".step-dots"),
             gaps: dots.slice(1).map((b, i) => b.x - dots[i].right),
             minTarget: Math.min(...dots.map((b) => Math.min(b.width, b.height))),
           };
         });
-        assert.ok(Math.abs(alignment.title - alignment.action) < 1, "title and action share an axis");
+        assert.ok(Math.abs(alignment.title - alignment.action) < 1, "title and action group share an axis");
         assert.ok(Math.abs(alignment.action - alignment.steps) < 1, "step rail remains centred, including Done");
         assert.ok(alignment.gaps.every((gap) => Math.abs(gap - alignment.gaps[0]) < 1));
         assert.ok(alignment.minTarget >= 44, "child-sized step targets");
@@ -229,7 +237,7 @@ for (const engine of [chromium, webkit]) {
   await page.locator(".next").tap();
   assert.equal(
     await page.locator(".machine-choice").count(),
-    3,
+    6,
     "Done returns to machine choice",
   );
   await browser.close();

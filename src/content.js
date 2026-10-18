@@ -1,3 +1,4 @@
+import { EXTRA_CONTENT } from "./extra-content.js";
 export const LANGUAGES = ["sk", "en"];
 export const CONTENT = {
   sk: {
@@ -8,6 +9,7 @@ export const CONTENT = {
     mute: "Vypnúť hlas",
     unmute: "Zapnúť hlas",
     home: "Všetky vynálezy",
+    homeButton: "Domov",
     next: "Ďalej",
     previous: "Späť",
     replay: "Ešte raz",
@@ -143,6 +145,7 @@ export const CONTENT = {
     mute: "Mute Leo",
     unmute: "Let Leo speak",
     home: "All inventions",
+    homeButton: "Home",
     next: "Next",
     previous: "Back",
     replay: "Again",
@@ -271,6 +274,8 @@ export const CONTENT = {
     },
   },
 };
+
+for (const lang of LANGUAGES) Object.assign(CONTENT[lang].machines, EXTRA_CONTENT[lang]);
 
 export function narrationManifest() {
   return LANGUAGES.flatMap((lang) => {

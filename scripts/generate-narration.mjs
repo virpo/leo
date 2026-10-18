@@ -54,8 +54,10 @@ async function generate(clip) {
               old.text === clip.text,
           ))) &&
       (await stat(output)).size > 1000
-    )
+    ) {
+      receipts[key] = fingerprint;
       return;
+    }
   } catch {}
   const attempt = () =>
     new Promise((resolve, reject) => {
@@ -107,6 +109,10 @@ for (const clip of clips) {
   finished++;
   console.log(`${finished}/${clips.length} ${clip.lang}/${clip.id}`);
 }
+await writeFile(
+  receiptFile,
+  JSON.stringify(receipts, null, 2) + "\n",
+);
 await writeFile(
   new URL("../public/audio/manifest.json", import.meta.url),
   JSON.stringify(clips, null, 2) + "\n",

@@ -125,6 +125,42 @@ p {
   width: 23px;
   height: 23px;
 }
+.workshop-brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.home-button {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  height: 48px;
+  padding: 0 17px 0 13px;
+  border: 1px solid var(--control-edge);
+  border-radius: 28px;
+  background: var(--control-surface);
+  box-shadow: var(--control-shadow);
+  font-size: 16px;
+  font-weight: 600;
+}
+.home-button svg {
+  width: 26px;
+  height: 26px;
+}
+.spring-strand .iso-line {
+  stroke: color-mix(in srgb, #66563e, var(--rust) var(--spring-energy));
+  stroke-width: 1.55px;
+}
+.pull-cord .iso-line {
+  stroke: var(--rust);
+  stroke-width: 2.1px;
+  stroke-linecap: round;
+}
+.ground-contact {
+  fill: #66502e;
+  opacity: 0.13;
+  filter: blur(2px);
+}
 .top-tools {
   display: flex;
   align-items: center;
@@ -171,7 +207,7 @@ p {
   flex: 1;
   min-height: 0;
   display: grid;
-  grid-template-columns: 29% 1fr;
+  grid-template-columns: 24% 1fr;
   align-items: stretch;
   gap: 18px;
   padding: 24px 0 8px;
@@ -267,6 +303,7 @@ p {
 .machine-choices {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
   gap: 14px;
   min-height: 0;
 }
@@ -274,10 +311,10 @@ p {
   min-width: 0;
   position: relative;
   display: grid;
-  grid-template-rows: minmax(0, 1fr) auto 62px;
-  padding: 12px 12px 16px;
+  grid-template-rows: minmax(0, 1fr) auto 38px;
+  padding: 8px 12px 10px;
   border: 1px solid #a38e65;
-  border-radius: 110px 110px 8px 8px;
+  border-radius: 72px 72px 8px 8px;
   background: linear-gradient(145deg, #f8edda88, #ddcba833);
   box-shadow: inset 0 0 0 5px #eddfc050;
   transition:
@@ -308,12 +345,12 @@ p {
 }
 .choice-name {
   font:
-    600 clamp(28px, 3vw, 40px)/0.92 Manuscript,
+    600 clamp(25px, 2.6vw, 34px)/0.92 Manuscript,
     Georgia,
     serif;
   text-align: center;
   align-self: center;
-  padding: 6px 0 16px;
+  padding: 4px 0 7px;
 }
 .choice-arrow {
   align-self: end;
@@ -377,7 +414,7 @@ p {
   pointer-events: none;
 }
 .cue-halo {
-  fill: #f5ead1c4;
+  fill: #f5ead140;
   stroke: #a2472d;
   stroke-width: 1.8;
   stroke-dasharray: 3 5;
@@ -390,7 +427,8 @@ p {
   stroke-width: 1.3;
   fill: none;
 }
-.dragging .touch-cue {
+.dragging .touch-cue,
+.explored .touch-cue {
   opacity: 0.25;
 }
 .lesson-layout > .leo-guide {
@@ -410,7 +448,53 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 14px;
+  position: relative;
+  z-index: 2;
 }
+.canopy-adjust {
+  display: grid;
+  place-items: center;
+  flex: 0 0 56px;
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--control-edge);
+  border-radius: 50%;
+  background: var(--control-surface);
+  box-shadow: var(--control-shadow);
+}
+.canopy-adjust svg { width: 26px; height: 26px; }
+.canopy-adjust:disabled { opacity: 0.35; cursor: default; }
+.direction-button {
+  height: 62px;
+  min-width: 150px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 23px;
+  font-weight: 600;
+  border: 1px solid #803d29;
+  border-radius: 40px;
+  color: #fff3db;
+  background: linear-gradient(#ad5136, #9b432d);
+  box-shadow: inset 0 1px 0 #f6bc8052, 0 3px 7px #713e251a;
+}
+.direction-button svg { width: 25px; height: 25px; transform: rotate(180deg); }
+.direction-controls .action-button { min-width: 150px; }
+.direction-controls button:disabled { opacity: 0.4; cursor: default; }
+.underwater {
+  --anatomy-paper: #a6c3be;
+  --anatomy-face: #a6c3be;
+  --anatomy-top: #b5cec5;
+  --anatomy-shade-0: #83a8ac;
+  --anatomy-shade-1: #93b5b7;
+  --anatomy-shade-2: #a0bfbd;
+  --anatomy-shade-3: #aec8c1;
+}
+.underwater .iso-line { stroke: #59888c; }
+.underwater .iso-line[data-tone="faint"] { stroke: #7da6a5; }
 .action-button {
   height: 62px;
   min-width: 225px;
@@ -558,7 +642,7 @@ p {
   }
   .home-layout {
     grid-template-columns: 1fr;
-    grid-template-rows: 35% minmax(0, 1fr);
+    grid-template-rows: 23% minmax(0, 1fr);
     padding-top: 16px;
     gap: 16px;
   }
@@ -582,16 +666,20 @@ p {
   .welcome .leo-button {
     max-height: none;
   }
+  .welcome .speech-button {
+    right: -40px;
+    top: 20%;
+  }
   .welcome .leo-hello {
     font-size: 25px;
     text-align: center;
   }
   .machine-choice {
-    grid-template-rows: minmax(0, 1fr) auto 66px;
-    padding-top: 18px;
+    grid-template-rows: minmax(0, 1fr) auto 40px;
+    padding-top: 12px;
   }
   .choice-name {
-    font-size: 35px;
+    font-size: 31px;
     line-height: 1;
   }
   .choice-art .machine-art {
@@ -615,7 +703,7 @@ p {
   }
   .lesson .speech-button {
     right: 0;
-    top: 18%;
+    top: 12%;
   }
   .model-stage {
     grid-area: 2/1/3/3;
@@ -684,11 +772,19 @@ p {
     flex-basis: 58px;
     gap: 8px;
   }
+  .canopy-controls { gap: 9px; }
+  .canopy-controls .action-button { min-width: 170px; padding: 0 13px; }
+  .canopy-adjust { flex-basis: 48px; width: 48px; height: 48px; }
+  .direction-button { min-width: 135px; height: 56px; font-size: 20px; padding: 0 18px; }
+  .direction-controls .action-button { min-width: 135px; }
   .brand {
     font-size: 24px;
     gap: 8px;
   }
   .brand > svg {
+    display: none;
+  }
+  .workshop-brand > .brand {
     display: none;
   }
   .top-tools {
@@ -709,7 +805,7 @@ p {
     display: none;
   }
   .home-layout {
-    grid-template-rows: 32% minmax(0, 1fr);
+    grid-template-rows: 20% minmax(0, 1fr);
     gap: 8px;
   }
   .welcome h1 {
@@ -728,20 +824,26 @@ p {
     width: 22px;
     height: 22px;
   }
+  .welcome .speech-button {
+    right: -18px;
+    top: 0;
+  }
   .machine-choices {
     gap: 7px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(0, 1fr));
   }
   .machine-choice {
     border-radius: 65px 65px 7px 7px;
-    padding: 10px 3px;
+    padding: 5px 3px;
+    grid-template-rows: minmax(0, 1fr) auto;
   }
   .choice-name {
-    font-size: 24px;
+    font-size: 21px;
     line-height: 1;
   }
   .choice-arrow {
-    width: 43px;
-    height: 43px;
+    display: none;
   }
   .lesson-layout {
     grid-template-columns: minmax(0, 1fr) 115px;
